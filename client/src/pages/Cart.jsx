@@ -109,18 +109,14 @@ const Cart = () => {
     }
   }, [user])
 
-  const cartAmount = getCartAmount()
-  const tax = (cartAmount * 2) / 100
+  const cartAmount = useMemo(() => getCartAmount(), [cartItem, products]);
+    const tax = (cartAmount * 2) / 100
   const totalAmount = cartAmount + tax
 
-  if (!products.length || !cartItem || Object.keys(cartItem).length === 0) {
-    return (
-      <p className="mt-16 text-center text-gray-500 text-lg">
-        Your cart is empty
-      </p>
-    )
+  if (!products?.length || !cartItem || Object.keys(cartItem).length === 0) {
+    return <p className="mt-16 text-center text-gray-500 text-lg">Your cart is empty</p>
   }
-
+  
   return (
     <div className="flex flex-col md:flex-row mt-16">
       <div className="flex-1 max-w-4xl">
@@ -152,7 +148,7 @@ const Cart = () => {
               >
                 <img
                   className="max-w-full h-full object-cover"
-                  src={product.image[0]}
+                  src={product.image?.[0]}
                   alt={product.name}
                 />
               </div>
@@ -171,12 +167,8 @@ const Cart = () => {
                       value={cartItem[product._id]}
                       className="outline-none"
                     >
-                      {Array.from(
-                        {
-                          length: Math.max(cartItem[product._id], 10),
-                        },
-                        (_, i) => i + 1
-                      ).map((val) => (
+                      {Array.from({ length: Math.max(cartItem[product._id], 10) }, (_, i) => i + 1)
+                       .map((val) => (
                         <option key={val} value={val}>
                           {val}
                         </option>
