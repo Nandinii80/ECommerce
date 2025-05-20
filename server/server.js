@@ -42,8 +42,7 @@ const startServer = async () => {
     await connectDB(); // Connect to MongoDB
     await connectCloudinary() //connect to cloud 
   
-    app.post('/stripe', express.raw({ type: 'application/json' }), stripeWebooks);
-
+    app.post('/api/order/webhook', express.raw({ type: 'application/json' }), stripeWebooks);
     // Routes
     app.get('/', (req, res) => res.send("API is working"));
     app.use('/api/user',userRouter)

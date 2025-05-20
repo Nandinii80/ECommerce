@@ -1,6 +1,6 @@
 import Order from "../models/Order.js"
 import Product from "../models/Product.js"
-import stripe, { Stripe } from 'stripe'
+import Stripe from 'stripe';
 import User from "../models/User.js"
 //place order trough online payemnt
 //api/order/stripe
@@ -81,7 +81,7 @@ export const stripeWebooks = async (request, response) => {
   let event;
 
   try {
-    event = stripe.webhooks.constructEvent(
+    event = stripeInstance.webhooks.constructEvent(
   request.body,
   sig,
   process.env.STRIPE_WEBHOOK_SECRET
