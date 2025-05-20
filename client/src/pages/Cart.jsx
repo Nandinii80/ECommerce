@@ -83,7 +83,9 @@ const Cart = () => {
           quantity: item.quantity,
         })),
         address: selectedAddress._id,
-      })
+      },
+      { withCredentials: true } 
+      )
       if (data.success) {
        window.location.replace(data.url)
       } else {
