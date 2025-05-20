@@ -141,6 +141,7 @@ export const stripeWebooks = async (request, response) => {
 export const placeOrderCOD = async (req, res) => {
   try {
     const { userId, items, address } = req.body;
+    console.log("Order request received:", req.body);
 
     if (!address || !items || items.length === 0) {
       return res.status(400).json({ success: false, message: "Invalid data" });
@@ -150,16 +151,18 @@ export const placeOrderCOD = async (req, res) => {
 
     for (const item of items) {
       const product = await Product.findById(item.product);
-      if (!product)
+      if (!product) {
+        console.log("Invalid product ID:", item.product);
         return res.status(400).json({ success: false, message: "Invalid product in items" });
-
+      }
       amount += product.offerPrice * item.quantity;
     }
 
-    // Add tax (2%)
     amount += Math.floor(amount * 0.02);
 
-    await Order.create({
+    console.log("Total amount calculated:", amount);
+
+    const newOrder = await Order.create({
       userId,
       items,
       amount,
@@ -167,11 +170,15 @@ export const placeOrderCOD = async (req, res) => {
       paymentType: "COD",
     });
 
+    console.log("Order created:", newOrder);
+
     return res.json({ success: true, message: "Order placed successfully" });
   } catch (error) {
+    console.error("Error in placeOrderCOD:", error);
     return res.status(500).json({ success: false, message: error.message });
   }
 };
+
 
 // get orders by user id /api/order/user
 export const getUserOrders = async (req, res) => {

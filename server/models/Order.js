@@ -13,8 +13,15 @@ const orderSchema = new mongoose.Schema(
 
     amount: { type: Number, required: true, min: 0 },
 
-    address: { type: mongoose.Schema.Types.ObjectId, ref: 'Address', required: true },
-
+    address: {
+      type: {
+        street: { type: String, required: true },
+        city: { type: String, required: true },
+        zipcode: { type: String, required: true }
+      },
+      required: true
+    }
+    ,
     status: {
       type: String,
       enum: ["order placed", "processing", "shipped", "delivered", "cancelled"],
