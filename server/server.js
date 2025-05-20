@@ -23,7 +23,7 @@ const port = process.env.PORT || 4000;
 // app.use(cors(corsOptions));
 
 app.use(cors({
-  origin : "http://localhost:5173" ,
+  origin : ["http://localhost:5173" , "https://e-commerce-ofru.vercel.app/" ] ,
   //methods : ['GET','PUT','POST','DELETE'],
  // allowedHeaders : ['content-type'],
   credentials: true
