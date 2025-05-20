@@ -109,7 +109,7 @@ const Cart = () => {
     }
   }, [user])
 
-  const cartAmount = useMemo(() => getCartAmount(), [cartItem, products]);
+  const cartAmount = getCartAmount();
     const tax = (cartAmount * 2) / 100
   const totalAmount = cartAmount + tax
 
