@@ -22,7 +22,7 @@ const port = process.env.PORT || 4000;
 // };
 // app.use(cors(corsOptions))
 app.use(cors({
-  origin: ["http://localhost:5173", "https://e-commerce-ofru.vercel.app"],
+  origin: ["http://localhost:5173", "https://e-commerce-client-nandinii80s-projects.vercel.app"],
   credentials: true
 }));
 
