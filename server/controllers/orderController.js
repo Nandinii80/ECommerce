@@ -88,12 +88,14 @@ export const stripeWebooks = async (request, response) => {
 );
 
   } catch (error) {
+    console.log("Error constructing webhook event:", error.message);
     return response.status(400).send(`Webhook Error: ${error.message}`);
   }
 
   try {
     switch (event.type) {
       case "payment_intent.succeeded": {
+        console.log("PaymentIntent was successful!");
         const paymentIntent = event.data.object;
         const paymentIntentId = paymentIntent.id;
 
@@ -113,7 +115,7 @@ export const stripeWebooks = async (request, response) => {
         await Order.findByIdAndUpdate(orderId, { isPaid: true });
 
         // Clear user cart (ensure field name is correct)
-        await User.findByIdAndUpdate(userId, { cartItems: [] });
+        await User.findByIdAndUpdate(userId, { cartItem: [] });
 
         break;
       }

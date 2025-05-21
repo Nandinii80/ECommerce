@@ -34,7 +34,7 @@ app.use(cors({
 //   credentials: true,
 // }));
 
-app.use(express.json());
+// app.use(express.json());
     app.use(cookieParser());
 
 const startServer = async () => {
@@ -44,6 +44,7 @@ const startServer = async () => {
   
     app.post('/api/order/webhook', express.raw({ type: 'application/json' }), stripeWebooks);
     // Routes
+    app.use(express.json());
     app.get('/', (req, res) => res.send("API is working"));
     app.use('/api/user',userRouter)
     app.use('/api/seller',sellerRouter)
