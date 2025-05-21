@@ -100,8 +100,8 @@ const Cart = () => {
   }
 
   useEffect(() => {
-    console.log("cartItem: ", cartItem)
-    console.log("products: ", products)
+    //console.log("cartItem: ", cartItem)
+   // console.log("products: ", products)
     if (products.length > 0 && cartItem) getCart()
   }, [products, cartItem])
 

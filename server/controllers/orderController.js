@@ -95,7 +95,7 @@ export const stripeWebooks = async (request, response) => {
   try {
     switch (event.type) {
       case "payment_intent.succeeded": {
-        console.log("PaymentIntent was successful!");
+       // console.log("PaymentIntent was successful!");
         const paymentIntent = event.data.object;
         const paymentIntentId = paymentIntent.id;
 

@@ -6,7 +6,7 @@ import { dummyProducts } from "../assets/greencart_assets/assets";
 import axios from 'axios';
 
 axios.defaults.withCredentials = true;
-console.log('Backend URL:', import.meta.env.VITE_BACKEND_URL);
+//console.log('Backend URL:', import.meta.env.VITE_BACKEND_URL);
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 
 export const AppContext = createContext();
@@ -68,7 +68,7 @@ export const AppContextProvider = ({ children }) => {
   const fetchWishlist = async () => {
     try {
       const { data } = await axios.get('/api/wishlist');
-      console.log("Fetched wishlist data:", data);
+    //  console.log("Fetched wishlist data:", data);
       if (data.success) {
         setWishlist(data.wishlist);
       }
@@ -79,12 +79,12 @@ export const AppContextProvider = ({ children }) => {
 
 
   const toggleWishlist = async (productId) => {
-    console.log("toggleWishlist called with:", productId);
+   // console.log("toggleWishlist called with:", productId);
     if (isInWishlist(productId)) {
-      console.log("Product is in wishlist, removing:", productId);
+    //  console.log("Product is in wishlist, removing:", productId);
       await removeFromWishlist(productId);
     } else {
-      console.log("Product not in wishlist, adding:", productId);
+    //  console.log("Product not in wishlist, adding:", productId);
       await addToWishlist(productId);
     }
   };
